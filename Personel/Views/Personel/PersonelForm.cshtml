@@ -1,0 +1,41 @@
+﻿@model Personel.ViewModels.PersonelFormViewModel
+@{
+    ViewBag.Title = "PersonelForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Personel Formu</h2>
+
+@using (Html.BeginForm("Kaydet", "Personel", FormMethod.Post))
+{
+<div class="form-group">
+    @Html.LabelFor(m => m.Personel.Ad)
+    @Html.TextBoxFor(m => m.Personel.Ad, new { @class = "form-control" })
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.Personel.Soyad)
+    @Html.TextBoxFor(m => m.Personel.Soyad, new { @class = "form-control" })
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.Personel.DepartmanId)
+    @Html.DropDownListFor(m=>m.Personel.DepartmanId,new SelectList(Model.Departmanlar,"Id","Ad"), new { @class = "form-control" })
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.Personel.Maas)
+    @Html.TextBoxFor(m => m.Personel.Maas, new { @class = "form-control" })
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.Personel.DogumTarihi)
+    @Html.TextBoxFor(m => m.Personel.DogumTarihi,"{0:yyyy-MM-dd}", new { @class = "form-control" ,type="date"})
+</div>
+<div class="radio">
+    <label>
+        @Html.RadioButtonFor(m => m.Personel.Cinsiyet, true) Kadın
+    </label>
+    <label>
+        @Html.RadioButtonFor(m => m.Personel.Cinsiyet, false) Erkek
+    </label>
+</div>
+@Html.HiddenFor(m=>m.Personel.Id)
+<button type="submit" class="btn btn-info">Kaydet</button>
+}

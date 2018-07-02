@@ -1,0 +1,41 @@
+﻿@model List<Personel.Models.Entity_Framework.Personel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.ActionLink("Yeni personel", "Yeni", null, new {@class="btn btn-success"})
+
+<table class="table table-hover table-striped">
+    <thead>
+        <tr>
+            <th>AD</th>
+            <th>SOYAD</th>
+            <th>DEPARTMAN ID</th>
+            <th>MAAS</th>
+            <th>YAS</th>
+            <th>DOGUM TARIHI</th>
+            <th>CINSIYET</th>
+            <th>Güncelle</th>
+            <th>Sil</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var personel in Model)
+        {
+            <tr>
+                <td>@personel.Ad</td>
+                <td>@personel.Soyad</td>
+                <td>@personel.Departman.Ad</td>
+                <td>@personel.Maas</td>
+                <td>@(DateTime.Now.Year - personel.DogumTarihi.Value.Year )</td>
+                <td>@personel.DogumTarihi.Value.ToString("dd-MM-yyyy")</td>
+                <td>@(personel.Cinsiyet==true?"Kadın":"Erkek")</td>
+                <td>@Html.ActionLink("Guncelle","Guncelle", new {id=personel.Id }, new { @class = "btn btn-info" })</td>
+                <td>@Html.ActionLink("Sil", "Sil", new { id = personel.Id }, new { @class = "btn btn-danger" })</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
